@@ -1,0 +1,60 @@
+#!/bin/bash
+# Source https://github.com/cadorn/bash.origin
+. "$HOME/.bash.origin"
+function init {
+		eval BO_SELF_BASH_SOURCE="$BO_READ_SELF_BASH_SOURCE"
+		BO_deriveSelfDir ___TMP___ "$BO_SELF_BASH_SOURCE"
+		local __BO_DIR__="$___TMP___"
+
+
+		function new {
+
+				prefix="${1}"
+
+				if [ "$prefix" != "BO_CLI" ]; then
+						echo "ERROR: Prefix must be set to 'BO_CLI'. This requirement will be removed when we have macros for bash files."
+						exit 1
+				fi
+
+				BO_log "$VERBOSE" "New 'bash.origin.cli' instance with prefix '${prefix}'"
+
+				export ${prefix}="github.com/bash-origin/bash.origin.cli"
+
+
+				function BO_GIT_parseArgs {
+
+						# TODO: Use this lib once we use bash >= 4; https://github.com/akesterson/cmdarg
+						# See: http://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
+
+
+						# TODO: Implement for bash < 4
+						# @see http://spf13.com/post/easy-bash-scripting-with-shflags
+						# @see https://code.google.com/archive/p/shflags/wikis/Documentation10x.wiki
+
+
+						function example {
+								# @see http://stackoverflow.com/a/31443098/330439
+
+								while [ "$#" -gt 0 ]; do
+								  case "$1" in
+								    -n) name="$2"; shift 2;;
+								    -p) pidfile="$2"; shift 2;;
+								    -l) logfile="$2"; shift 2;;
+
+								    --name=*) name="${1#*=}"; shift 1;;
+								    --pidfile=*) pidfile="${1#*=}"; shift 1;;
+								    --logfile=*) logfile="${1#*=}"; shift 1;;
+								    --name|--pidfile|--logfile) echo "$1 requires an argument" >&2; exit 1;;
+
+								    -*) echo "unknown option: $1" >&2; exit 1;;
+								    *) handle_argument "$1"; shift 1;;
+								  esac
+								done
+						}
+
+				}
+
+		}
+
+}
+init
