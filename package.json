@@ -2,8 +2,8 @@
     "uid": "github.com/bash-origin/bash.origin.cli",
     "name": "bash.origin.cli",
     "version": "0.1.1",
-    "dependencies": {
-        "bash.origin.test": "^0.1.18"
+    "devDependencies": {
+        "bash.origin.workspace": "^0.2.55"
     },
     "scripts": {
         "test": "bash.origin.test examples"
