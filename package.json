@@ -2,8 +2,11 @@
     "uid": "github.com/bash-origin/bash.origin.cli",
     "name": "bash.origin.cli",
     "version": "0.1.2",
+    "pm": {
+        "publish": "npm"
+    },
     "devDependencies": {
-        "bash.origin.workspace": "^0.2.55"
+        "bash.origin.workspace": "^0.2.60"
     },
     "scripts": {
         "test": "bash.origin.test examples"
